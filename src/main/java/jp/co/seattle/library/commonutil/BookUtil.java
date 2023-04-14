@@ -31,17 +31,17 @@ public class BookUtil {
 		// （自分のメモ）ArrayList<String>という箱の中に、errorListを入れている　この後errorListの中身を記述する
 
 		// 必須チェック
-		if (isEmptyBookInfo(bookInfo)) {
+		if (!(isEmptyBookInfo(bookInfo))) {
 			errorList.add(REQUIRED_ERROR);
 		}
 
 		// ISBNのバリデーションチェック
-		if (!(isValidIsbn(bookInfo.getIsbn()))) {
+		if (isValidIsbn(bookInfo.getIsbn())) {
 			errorList.add(ISBN_ERROR);
 		}
 
 		// 出版日の形式チェック
-		if (checkDate(bookInfo.getPublishDate())) {
+		if (!checkDate(bookInfo.getPublishDate())) {
 			errorList.add(PUBLISHDATE_ERROR);
 		}
 
@@ -97,10 +97,10 @@ public class BookUtil {
 	 */
 	private static boolean isValidIsbn(String isbn) {
 		//TODO　ISBNが半角数字で10文字か13文字であればtrue（タスク４)
-		if (isbn == null) {
+		if ((isbn.length() == 0) || ((isbn.length() == 10 || isbn.length() == 13) && isbn.matches("^[0-9]+$"))) {
 			return false;
-		} else if ((isbn.length() == 10 || isbn.length() == 13) && isbn.matches("^[0-9]+$")) {
-			return false;
+			/*} else if ((isbn.length() == 10 || isbn.length() == 13) && isbn.matches("^[0-9]+$")) {
+				return false;*/
 		} else {
 			return true;
 		}
