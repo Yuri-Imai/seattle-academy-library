@@ -25,17 +25,25 @@ public class BookUtil {
 	 * @return errorList エラーメッセージのリスト
 	 */
 	public List<String> checkBookInfo(BookDetailsInfo bookInfo) {
-		
+
 		//TODO　各チェックNGの場合はエラーメッセージをリストに追加（タスク４）
-		List<String> errorList = new ArrayList<>();
+		List<String> errorList = new ArrayList<String>();
+		// （自分のメモ）ArrayList<String>という箱の中に、errorListを入れている　この後errorListの中身を記述する
+
 		// 必須チェック
+		if (isEmptyBookInfo(bookInfo)) {
+			errorList.add(REQUIRED_ERROR);
+		}
 
-		
 		// ISBNのバリデーションチェック
-
+		if (!(isValidIsbn(bookInfo.getIsbn()))) {
+			errorList.add(ISBN_ERROR);
+		}
 
 		// 出版日の形式チェック
-
+		if (checkDate(bookInfo.getPublishDate())) {
+			errorList.add(PUBLISHDATE_ERROR);
+		}
 
 		return errorList;
 	}
@@ -51,8 +59,30 @@ public class BookUtil {
 			DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 			formatter.setLenient(false); // ←これで厳密にチェックしてくれるようになる
 			//TODO　取得した日付の形式が正しければtrue（タスク４）
-			
-			return true;
+			//if(!publishDate.equals(formatter))
+			//🌟publishDateをDate型に変換
+			formatter.parse(publishDate);
+			//String days = new SimpleDateFormat("yyyyMMdd").format(publishDate);
+			String dayyy = formatter.format(formatter.parse(publishDate));
+
+			//（誤入力例：String型）2023/04/07, 2023-04-07, 2023.04.07, にせんにじゅう三年4ガツ四日
+			//（Date型）20230407 
+			//（String型）20230407
+
+			//（正しい入力例：String型）20230407 
+			//（Date型）20230407
+			//（String型）20230407
+
+			// 🌟変換したDate型をString型に変換
+			//String days = String.valueOf(formatter);
+
+			// 🌟String型に変換したものと引数で渡されたpublishDateと一致しているかをif文で確認
+			if (publishDate.equals(dayyy)) {
+				return true;
+			} else {
+				return false;
+			}
+
 		} catch (Exception p) {
 			p.printStackTrace();
 			return false;
@@ -66,9 +96,14 @@ public class BookUtil {
 	 * @return ISBNが半角数字で10文字か13文字かどうか
 	 */
 	private static boolean isValidIsbn(String isbn) {
-		//TODO　ISBNが半角数字で10文字か13文字であればtrue（タスク４）
-		
-		return true;
+		//TODO　ISBNが半角数字で10文字か13文字であればtrue（タスク４)
+		if (isbn == null) {
+			return false;
+		} else if ((isbn.length() == 10 || isbn.length() == 13) && isbn.matches("^[0-9]+$")) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	/**
@@ -79,7 +114,16 @@ public class BookUtil {
 	 */
 	private static boolean isEmptyBookInfo(BookDetailsInfo bookInfo) {
 		//TODO　タイトル、著者、出版社、出版日のどれか一つでもなかったらtrue（タスク４）
-		
-		return true;
+
+		//if文　null使う
+		String title = bookInfo.getTitle();
+		String author = bookInfo.getAuthor();
+		String publisher = bookInfo.getPublisher();
+		String publishdate = bookInfo.getPublishDate();
+		if (title.isEmpty() || author.isEmpty() || publisher.isEmpty() || publishdate.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
