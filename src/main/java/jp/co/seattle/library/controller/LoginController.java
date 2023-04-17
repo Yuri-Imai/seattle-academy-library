@@ -50,7 +50,6 @@ public class LoginController {
 		} else {
 			model.addAttribute("errorMessage", "メールアドレスとパスワードが一致しません。");
 			return "login";
-			
 		}
 	}
 }

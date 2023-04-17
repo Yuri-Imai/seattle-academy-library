@@ -81,7 +81,7 @@
                     </div>
                     <div>
                         <span>出版日</span><span class="care care2">必須</span>
-                         <c:if test="${!empty bookInfo}">
+                        <c:if test="${!empty bookInfo}">
                             <input type="text" name="publishDate" value="${bookInfo.publishDate}">
                         </c:if>
                         <c:if test="${empty bookInfo}">
@@ -110,12 +110,10 @@
                 </div>
             </div>
             <div class="bookBtn_box">
-                <button type="submit" id="add-btn" class="btn_updateBook">更新</button>    
+                <button type="submit" id="add-btn" class="btn_updateBook">更新</button>
         </form>
-        		<form method="post" action="deleteBook" name="delete">
-
- 				</form>
- 			</div>      
+        <form method="post" action="deleteBook" name="delete"></form>
+        </div>
     </main>
 </body>
 </html>
