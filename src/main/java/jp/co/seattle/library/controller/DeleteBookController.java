@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jp.co.seattle.library.commonutil.BookUtil;
 import jp.co.seattle.library.service.BooksService;
-import jp.co.seattle.library.service.ThumbnailService;
 
 @Controller
 public class DeleteBookController {
@@ -22,10 +20,6 @@ public class DeleteBookController {
 
 	@Autowired
 	private BooksService booksService;
-	@Autowired
-	private ThumbnailService thumbnailService;
-	@Autowired
-	private BookUtil bookUtil;
 
 	/**
 	 * 書籍情報を更新する
@@ -38,7 +32,9 @@ public class DeleteBookController {
 	@Transactional
 	@RequestMapping(value = "/deleteBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String deleteBook(Locale locale, @RequestParam("bookId") int bookId, Model model) {
-		//logger.info("Welcome updateBook! The client locale is {}.", locale);
+		
+		// 書籍情報を削除する
+		booksService.deleteBook(bookId);
 
 		// 一覧画面に遷移する
 		return "redirect:/home";
