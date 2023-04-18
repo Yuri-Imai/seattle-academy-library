@@ -30,6 +30,7 @@ public class BooksService {
 	 * @return 書籍リスト
 	 */
 	public List<BookInfo> getBookList() {
+		//Listは配列に近いもの
 
 		// TODO 書籍名の昇順で書籍情報を取得するようにSQLを修正（タスク３）
 		List<BookInfo> getedBookList = jdbcTemplate.query(
@@ -76,7 +77,7 @@ public class BooksService {
 	 */
 	public void deleteBook(int bookId) {
 		// TODO 対象の書籍を削除するようにSQLを修正（タスク6）
-		String sql = "DELETE FROM books WHERE books.id = ?";
+		String sql = "DELETE FROM books WHERE books.id = ?;";
 		jdbcTemplate.update(sql, bookId);
 	}
 
