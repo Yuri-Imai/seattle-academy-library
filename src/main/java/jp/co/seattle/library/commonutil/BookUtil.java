@@ -27,8 +27,7 @@ public class BookUtil {
 	public List<String> checkBookInfo(BookDetailsInfo bookInfo) {
 
 		//TODO　各チェックNGの場合はエラーメッセージをリストに追加（タスク４）
-		List<String> errorList = new ArrayList<String>();
-		// （自分のメモ）ArrayList<String>という箱の中に、errorListを入れている　この後errorListの中身を記述する
+		List<String> errorList = new ArrayList<>();
 
 		// 必須チェック
 		if (!(isEmptyBookInfo(bookInfo))) {
@@ -59,24 +58,9 @@ public class BookUtil {
 			DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 			formatter.setLenient(false); // ←これで厳密にチェックしてくれるようになる
 			//TODO　取得した日付の形式が正しければtrue（タスク４）
-			//if(!publishDate.equals(formatter))
-			//🌟publishDateをDate型に変換
-			formatter.parse(publishDate);
-			//String days = new SimpleDateFormat("yyyyMMdd").format(publishDate);
 			String dayyy = formatter.format(formatter.parse(publishDate));
-
-			//（誤入力例：String型）2023/04/07, 2023-04-07, 2023.04.07, にせんにじゅう三年4ガツ四日
-			//（Date型）20230407 
-			//（String型）20230407
-
-			//（正しい入力例：String型）20230407 
-			//（Date型）20230407
-			//（String型）20230407
-
-			// 🌟変換したDate型をString型に変換
-			//String days = String.valueOf(formatter);
-
-			// 🌟String型に変換したものと引数で渡されたpublishDateと一致しているかをif文で確認
+			
+			// String型に変換したものと引数で渡されたpublishDateと一致しているかをif文で確認
 			if (publishDate.equals(dayyy)) {
 				return true;
 			} else {
