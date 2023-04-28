@@ -51,5 +51,16 @@ public class UsersService {
 			return null;
 		}
 	}
+	
+	public UserInfo resetUserInfo(String email, String password) {
+		try {
+			String sql = "SELECT email, password FROM users WHERE email = '" + email + "' AND password = '" + password
+					+ "'";
+			UserInfo selectedUserInfo = jdbcTemplate.queryForObject(sql, new UserCountRowMapper());
+			return selectedUserInfo;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
 }
