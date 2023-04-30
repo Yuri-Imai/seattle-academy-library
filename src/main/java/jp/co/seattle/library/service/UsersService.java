@@ -54,7 +54,7 @@ public class UsersService {
 	
 	public UserInfo resetUserInfo(String email, String password) {
 		try {
-			String sql = "SELECT email, password FROM users WHERE email = '" + email + "' AND password = '" + password
+			String sql = "UPDATE FROM users WHERE email = '" + email + "' AND password = '" + password
 					+ "'";
 			UserInfo selectedUserInfo = jdbcTemplate.queryForObject(sql, new UserCountRowMapper());
 			return selectedUserInfo;

@@ -16,7 +16,7 @@ import jp.co.seattle.library.dto.UserInfo;
 import jp.co.seattle.library.service.UsersService;
 
 /**
- * アカウント作成コントローラー
+ * パスワードリセットコントローラー
  */
 @Controller // APIの入り口
 public class PasswordResetController {
@@ -25,10 +25,10 @@ public class PasswordResetController {
 	@Autowired
 	private UsersService usersService;
 
-	@RequestMapping(value = "/newAccount", method = RequestMethod.GET) // value＝actionで指定したパラメータ
+	/*@RequestMapping(value = "/newAccount", method = RequestMethod.GET) // value＝actionで指定したパラメータ
 	public String createAccount(Model model) {
 		return "createAccount";
-	}
+	}*/
 
 	/**
 	 * 新規アカウント作成
@@ -42,7 +42,7 @@ public class PasswordResetController {
 
 	@Transactional
 	@RequestMapping(value = "/passwordReset", method = RequestMethod.POST)
-	public String createAccount(Locale locale, @RequestParam("email") String email,
+	public String passwordReset(Locale locale, @RequestParam("email") String email,
 			@RequestParam("password") String password, @RequestParam("passwordForCheck") String passwordForCheck,
 			Model model) {
 		// デバッグ用ログ
@@ -59,11 +59,11 @@ public class PasswordResetController {
 				return "redirect:/login";
 			} else {
 				model.addAttribute("errorMessage", "パスワードと確認用パスワードが一致していません。");
-				return "createAccount";
+				return "passwordReset";
 			}
 		} else {
 			model.addAttribute("errorMessage", "パスワードは８桁以上の半角英数字で設定してください。");
-			return "createAccount";
+			return "passwordReset";
 		}
 	}
 

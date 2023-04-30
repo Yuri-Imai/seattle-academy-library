@@ -13,16 +13,26 @@
 <link href="<c:url value="/resources/css/login.css" />" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="reset_password_link">
-        <a href="<%=request.getContextPath()%>/passwordReset"></a>
-        <form method="post" action="passwordReset">
-            <div class="title">ログイン</div>
-            <label class="label">メールアドレス</label> <input type="text" class="input" name="email" id="email" autocomplete="off" required /> <label class="label">パスワード</label> <input type="password" class="input" id="password" name="password" required />
-            <c:if test="${!empty errorMessage}">
-                <div class="error">${errorMessage}</div>
-            </c:if>
-            <input type="submit" class="button primary" value="パスワード変更" />
-        </form>
+    <div class="wrapper">
+        <div class="authorization_head">
+            <img class="mark" src="resources/img/logo.png" />
+            <div class="logo">Seattle Library</div>
+        </div>
+        <div class="authorization">
+            <div class="authorization_form">
+                <form method="post" action="passwordReset">
+                    <div class="title">パスワードリセット</div>
+                    <label class="label">メールアドレス</label> <input type="email" class="input" id="email" name="email" autocomplete="off" required> <label class="label">パスワード</label> <input type="password" class="input" id="password" name="password" required> <label class="label">パスワード（確認用）</label> <input type="password" class="input" id="passwordForCheck" name="passwordForCheck" required>
+                    <c:if test="${!empty errorMessage}">
+                        <div class="error">${errorMessage}</div>
+                    </c:if>
+                    <input type="submit" class="button primary" value="リセット" />
+                </form>
+            </div>
+        </div>
+        <footer>
+            <div class="copyright">© 2019 Seattle Consulting Co., Ltd. All rights reserved.</div>
+        </footer>
     </div>
 </body>
 </html>

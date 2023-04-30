@@ -28,19 +28,20 @@
                     </c:if>
                     <input type="submit" class="button primary" value="ログイン" />
                 </form>
-                <a href="<%=request.getContextPath()%>/passwordReset"></a>
-                <form method="post" action="passwordReset">
-                    <div class="title">ログイン</div>
-                    <label class="label">メールアドレス</label> <input type="text" class="input" name="email" id="email" autocomplete="off" required /> <label class="label">パスワード</label> <input type="password" class="input" id="password" name="password" required />
-                    <c:if test="${!empty errorMessage}">
-                        <div class="error">${errorMessage}</div>
-                    </c:if>
-                    <input type="submit" class="button primary" value="パスワード変更" />
-                </form>
             </div>
             <div class="authorization_navi">
                 <label class="authorization_text">まだアカウントをお持ちでないですか？</label> <a class="authorization_link marker" href="<%=request.getContextPath()%>/newAccount">アカウント作成</a>
+                <label class="authorization_text">パスワードをお忘れの方</label><a class="authorization_link marker" href="<%=request.getContextPath()%>/passwordReset">パスワードリセット</a>
             </div>
+        </div>
+        <footer>
+            <div class="copyright">© 2019 Seattle Consulting Co., Ltd. All rights reserved.</div>
+        </footer>
+    </div>
+    <div class="wrapper">
+        <div class="authorization_head">
+            <img class="mark" src="resources/img/logo.png" />
+            <div class="logo">Seattle Library</div>
         </div>
         <footer>
             <div class="copyright">© 2019 Seattle Consulting Co., Ltd. All rights reserved.</div>
